@@ -13,6 +13,23 @@ int main(int argc, char **argv){
   // create an instance of the cw2 class
   cw2 cw_class(nh);
 
+  ros::Publisher pointCloudPub_ =
+    nh.advertise<sensor_msgs::PointCloud2>("octomap_point_cloud_centers", 1);
+
+  ros::Subscriber sub_cloud = nh.subscribe(
+      "/r200/camera/depth_registered/points", 
+      1, 
+      &cw2::pointCloudCallback, 
+      &cw_class
+  );
+
+  ros::Subscriber sub_color = nh.subscribe(
+      "/r200/camera/color/image_raw", 
+      1, 
+      &cw2::colorImageCallback, 
+      &cw_class
+  );
+
   // MoveIt! requirement for non-blocking group.move()
   ros::AsyncSpinner spinner(1);
   spinner.start();
@@ -28,4 +45,5 @@ int main(int argc, char **argv){
     // sleep to fulfill the loop rate
     rate.sleep();
   }
+  return 0;
 }

@@ -1,0 +1,37 @@
+<launch>
+  <!-- Delay param if needed -->
+  <arg name="launch_delay" value="5.0"/>
+
+  <!-- 1) Load Panda model (URDF) and any Gazebo config -->
+  <include file="$(find panda_description)/launch/description.launch"/>
+
+  <!-- 2) Start the coursework world spawner -->
+  <arg name="models_dir" value="$(find cw2_world_spawner)/models/"/>
+  <include file="$(find cw2_world_spawner)/launch/world_spawner.launch">
+    <arg name="launch_delay" value="$(arg launch_delay)"/>
+    <arg name="models_dir" value="$(arg models_dir)"/>
+  </include>
+
+  <node pkg="octomap_server" type="octomap_server_node" name="octomap_server" output="screen">
+    
+    <!-- Input point cloud topic -->
+    <remap from="cloud_in" to="/r200/camera/depth_registered/points"/>
+
+    <!-- Basic Octomap settings -->
+    <param name="resolution" value="0.01"/>  <!-- smaller => more detailed octree -->
+    <param name="frame_id" value="world"/>   <!-- or "map", whichever is your TF root -->
+
+    <!-- Additional optional params -->
+    <!-- max range for sensor rays (cut off if further) -->
+    <param name="sensor_model/max_range" value="5.0"/> 
+    <!-- whether to publish the center points of each occupied voxel -->
+    <param name="publish_point_cloud_centers" value="true"/>
+
+  </node>
+
+
+  <node pkg="cw2_team_11"
+        name="cw2_solution_node"
+        type="cw2_solution_node"
+        output="screen" />
+</launch>

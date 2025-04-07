@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(cw2_team_x) # change your team name here!
+project(cw2_team_11) # change your team name here!
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -22,6 +22,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 find_package(PCL REQUIRED)
+
+find_package(octomap REQUIRED)
+include_directories(${OCTOMAP_INCLUDE_DIRS})
+link_libraries(${OCTOMAP_LIBRARIES})
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -124,7 +128,7 @@ catkin_package(
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
-  ${PCL_INCLUDE_DIRS}
+  ${PCL_INCLUDE_DIRS}    # Use PCL_INCLUDE_DIRS here
 )
 
 # Declare a C++ library
@@ -162,7 +166,7 @@ add_dependencies(cw2_solution_node
 target_link_libraries(cw2_solution_node
   ${catkin_LIBRARIES}
   ${PROJECT_NAME}_cw2_class_lib
-  ${PCL_INCLUDE_DIRS}
+  ${PCL_LIBRARIES} 
 )
 
 #############
