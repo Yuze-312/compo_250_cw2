@@ -52,9 +52,9 @@ Run individual tasks using:
 - Time Spent:  80 hours
 - Team Contribution: Yuze Bai: 40%, Letong Li: 40%, Yang Dong: 20%.
 - Screenshot: 
-![Alt Text](cw2_team_11/cw2_figures/task_1_nought.png "Task 1 Nought Shaped Object")
+    ![Alt Text](cw2_team_11/cw2_figures/task_1_nought.png "Task 1 Nought Shaped Object")
 
-![Alt Text](cw2_team_11/cw2_figures/task_1_cross.png "Task 1 Cross Shaped Object")
+    ![Alt Text](cw2_team_11/cw2_figures/task_1_cross.png "Task 1 Cross Shaped Object")
 - Log Example:
 
 
@@ -95,3 +95,4 @@ Run individual tasks using:
 
 ## License
 This project is MIT licensed.
+
